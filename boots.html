@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="bmi.css">
+
+</head>
+
+<body>
+  <div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+ </div>
+  <div class="form-container">
+    <form id="formcontainer">
+      <h3>BMI CALCULATOR</h3>
+      <div class="first-1">
+        <label for="name">First Name</label>
+        <input type="text" placeholder="Enter Name" id="name"><br><span id="first_error"></span>
+      </div>
+      <div class="first-1">
+        <label for="last">Last Name</label>
+        <input type="text" placeholder="Enter Last Name" id="last"><span id="last_error"></span>
+      </div>
+      <div class="first-1">
+        <label for="age">Age</label>
+        <input type="number" placeholder="Enter Age" id="age"><span id="age_error"></span>
+      </div>
+      <div class="first-1">
+        <label>Weight in Kg</label>
+        <input type="number" placeholder="Enter Weight" id="weight"><span id="weight_error"></span>
+      </div>
+      <div class="first-1">
+        <label>Height in cm</label>
+        <input type="number" placeholder="Enter Height" id="height"><span id="height_error"></span>
+      </div>
+      <div>
+        <label for="submit"></label>
+        <input type="submit" value="Submit" id="submit" class="btn">
+        <input type="reset" value="Reset" class="btn">
+      </div>
+
+      <div class="output">
+        <p id="bmiresult"></p>
+        <p id="bmi"></p>
+      </div>
+    </form>
+  </div>
+  <script>
+    document.getElementById("formcontainer").addEventListener("submit", function (event) {
+      event.preventDefault();
+      let name = document.getElementById("name").value;
+      let last = document.getElementById("last").value;
+      let age = parseInt(document.getElementById("age").value);
+      let weight = parseFloat(document.getElementById("weight").value);
+      let height = parseFloat(document.getElementById("height").value);
+      height /= 100;
+      let bmi = (weight / (height * height));
+      let bmitext;
+      let bg;
+
+      if (bmi <= 18) {
+        bmitext = "Under weight";
+        bg = '#048ED8';
+      } else if (bmi >= 18 && bmi <= 25) {
+        bmitext = "Normal weight";
+        bg = '#11C805';
+      } else if (bmi >= 25 && bmi <= 30) {
+        bmitext = "Obesity";
+        bg = '#FC9C10';
+      } else {
+        bmitext = "Over weight";
+        bg = '#E4100F';
+      }
+      document.getElementById("bmi").innerHTML = bmi + ' ' + bmitext;
+      document.getElementById("bmi").style.backgroundColor = bg;
+
+      if (name === "") {
+        document.getElementById("first_error").innerHTML = "Please enter your first name";
+      } else {
+        document.getElementById("first_error").innerHTML = "";
+      }
+      if (last === "") {
+        document.getElementById("last_error").innerHTML = "Please enter your last name";
+      } else {
+        document.getElementById("last_error").innerHTML = "";
+      }
+      if (isNaN(age) || age <= 0) {
+        document.getElementById("age_error").innerHTML = "Please enter your age";
+      } else {
+        document.getElementById("age_error").innerHTML = "";
+      }
+      if (isNaN(weight) || weight <= 2) {
+        document.getElementById("weight_error").innerHTML = "Please provide a valid weight";
+      } else {
+        document.getElementById("weight_error").innerHTML = "";
+      }
+      if (isNaN(height) || height >= 50) {
+        document.getElementById("height_error").innerHTML = "Please provide a valid height";
+      } else {
+        document.getElementById("height_error").innerHTML = "";
+      }
+
+
+
+      if (name.trim() === "" && isNaN(age) || age <= 0 || isNaN(weight) || weight <= 0 || isNaN(height) || height <= 0) {
+        // document.getElementById("bmiresult").innerHTML = "please enter your First Name" + ",age" + ",weight" + ",height";
+      }
+      else {
+        document.getElementById("bmiresult").innerHTML = "First Name:" + '  ' + name + "<br>" + "Last Name:" + '  ' + last + "<br>" + "Age:" + '  ' + age + "<br>" + "Weight:" + '  ' + weight + "<br>" + "Height:" + '  ' + height;
+      }
+    })
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
